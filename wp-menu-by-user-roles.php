@@ -8,8 +8,14 @@ Author URI: https://github.com/kahnu044
 Version: 1.0
 */
 
+/**
+ * Render a custom user role selection field for a menu item.
+ *
+ * This function adds a dropdown field to select a user role for a menu item.
+ * It provides predefined options like 'All' and 'Unauthenticated', along with all user roles.
+ *
+ */
 
-// Show menu by user role
 function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
 {
 
@@ -41,8 +47,13 @@ function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
 
 add_action('wp_nav_menu_item_custom_fields', 'WP_MBUR_wp_menu_item_user_role_section', 10, 2);
 
-
-// Save user role information
+/**
+ * Save user role data for a menu item.
+ *
+ * This function handles the saving of the selected user role for a menu item.
+ * It retrieves the selected user role from the POST data, sanitizes it, and updates the corresponding post meta.
+ *
+ */
 function WP_MBUR_save_menu_item_user_role_data($menu_id, $menu_item_db_id)
 {
 
@@ -56,10 +67,18 @@ function WP_MBUR_save_menu_item_user_role_data($menu_id, $menu_item_db_id)
 add_action('wp_update_nav_menu_item', 'WP_MBUR_save_menu_item_user_role_data', 10, 2);
 
 
-// Filter menu items for front end
-function filter_menu_items($items)
+/**
+ * Filter menu items for display on the front end based on user roles.
+ *
+ * This function filters the menu items to display on the front end based on the
+ * user roles assigned to each menu item. It checks the selected user role against
+ * the current user's roles and includes the item if there's a match.
+ *
+ */
+
+function wp_mbur_filter_menu_items($items)
 {
-    $filtered_items = array();
+    $filtered_items = $items;
 
     foreach ($items as $item) {
         $item_id = $item->ID;
@@ -79,4 +98,4 @@ function filter_menu_items($items)
 
     return $filtered_items;
 }
-add_filter('wp_nav_menu_objects', 'filter_menu_items');
+add_filter('wp_nav_menu_objects', 'wp_mbur_filter_menu_items');
