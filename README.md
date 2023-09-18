@@ -11,7 +11,7 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 
 ## Latest Release
 
-[![Latest Release](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/kahnu044/wp-menu-by-user-roles/releases/tag/v1.0)
+[![Latest Release](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/kahnu044/wp-menu-by-user-roles/releases/tag/v1.0.0)
 
 ## Installation
 
