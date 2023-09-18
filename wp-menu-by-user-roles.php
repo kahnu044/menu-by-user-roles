@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: WP Menu By User Roles
-Plugin URI: https://github.com/kahnu044/wp-menu-by-user-roles
+Plugin Name: Menu By User Roles
+Plugin URI: https://github.com/kahnu044/menu-by-user-roles
 Description: It empowers website administrators to create custom menus tailored to specific user roles.
 Author: kahnu044
 Author URI: https://github.com/kahnu044

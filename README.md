@@ -1,6 +1,6 @@
-# wp-menu-by-user-roles
+# menu-by-user-roles
 
-Welcome to the official GitHub repository for "WP Menu By User Roles," the ultimate WordPress plugin for custom menu management based on user roles.
+Welcome to the official GitHub repository for "Menu By User Roles," the ultimate WordPress plugin for custom menu management based on user roles.
 
 ## Features
 
@@ -11,7 +11,7 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 
 ## Latest Release
 
-[![Latest Release](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/kahnu044/wp-menu-by-user-roles/releases/tag/v1.0.0)
+[![Latest Release](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/kahnu044/menu-by-user-roles/releases/tag/v1.0.0)
 
 ## Installation
 
@@ -30,7 +30,7 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 
 ## Screenshots
 
-![Screenshot 1](assets/screenshots/wp-menu-by-user-roles-screenshot.png)
+![Screenshot 1](assets/screenshots/menu-by-user-roles-screenshot.png)
 _*Here is an example of a menu item with user role selection options.*_
 
 ## Contributing
