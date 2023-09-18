@@ -16,26 +16,27 @@ function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
     $selected_role = get_post_meta($item_id, '_wp_menu_item_user_role', true);
     $roles = get_editable_roles();
 
-    echo '<div style="clear: both;">';
-    echo '<span class="description">' . __("Choose User Role", '') . '</span><br />';
-    echo '<input type="hidden" class="nav-menu-id" value="' . $item_id . '" />';
-    echo '<div class="logged-input-holder">';
+    echo '<p class="field-wp-user-roles description description-wide">';
+    echo '<label for="edit-menu-item-user-role-' . $item_id . '">';
+    echo 'Choose User Role <br/>';
+    echo '<select class="widefat" name="wp_mbur_menu_item_role[' . $item_id . ']" id="wp-mbur-menu-item-role-' . $item_id . '">';
 
-    echo '<select name="wp_mbur_menu_item_role[' . $item_id . ']" id="wp-mbur-menu-item-role' . $item_id . '">';
+    // predefined options
+    $options = array(
+        'all' => 'All',
+        'unauthenticated' => 'Unauthenticated'
+    );
 
-    $selected = ($selected_role == 'all') ? 'selected' : '';
-    echo '<option value="all" ' . $selected . '>All</option>';
+    // Merge user roles with predefined options
+    $options = array_merge($options, array_column($roles, 'name'));
 
-    $selected = ($selected_role == 'unauthenticated') ? 'selected' : '';
-    echo '<option value="unauthenticated" ' . $selected . '>Unauthenticated</option>';
-
-    foreach ($roles as $role_key => $role) {
-        $selected = ($selected_role == $role_key) ? 'selected' : '';
-        echo '<option value="' . $role_key . '" ' . $selected . '>' . $role['name'] . '</option>';
+    foreach ($options as $value => $label) {
+        $selected = ($selected_role == $value) ? 'selected' : '';
+        echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
     }
-    echo '</select>';
 
-    echo '</div></div>';
+    echo '</select>';
+    echo '</label></p>';
 }
 
 add_action('wp_nav_menu_item_custom_fields', 'WP_MBUR_wp_menu_item_user_role_section', 10, 2);
