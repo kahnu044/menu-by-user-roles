@@ -24,6 +24,12 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 3. Choose the desired user roles for the menu item.
 4. Save the menu.
 
+## Screenshots
+
+![Screenshot 1](assets/screenshots/wp-menu-by-user-roles-screenshot.png)
+_*Here is an example of a menu item with user role selection options.*_
+
+
 ## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
