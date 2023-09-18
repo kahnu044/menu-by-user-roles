@@ -9,6 +9,10 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 - Control menu visibility based on user authentication status.
 - Flexible options for displaying menu items to different user groups.
 
+## Latest Release
+
+[![Latest Release](https://img.shields.io/badge/release-v1.0-blue.svg)](https://github.com/kahnu044/wp-menu-by-user-roles/releases/tag/v1.0)
+
 ## Installation
 
 1. Download the plugin as a ZIP file.
@@ -28,7 +32,6 @@ Welcome to the official GitHub repository for "WP Menu By User Roles," the ultim
 
 ![Screenshot 1](assets/screenshots/wp-menu-by-user-roles-screenshot.png)
 _*Here is an example of a menu item with user role selection options.*_
-
 
 ## Contributing
 

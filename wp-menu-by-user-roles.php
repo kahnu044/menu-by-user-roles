@@ -5,7 +5,7 @@ Plugin URI: https://github.com/kahnu044/wp-menu-by-user-roles
 Description: It empowers website administrators to create custom menus tailored to specific user roles.
 Author: kahnu044
 Author URI: https://github.com/kahnu044
-Version: 1.0
+Version: 1.0.0
 */
 
 /**
