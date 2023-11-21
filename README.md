@@ -5,13 +5,8 @@ Welcome to the official GitHub repository for "Menu By User Roles," the ultimate
 ## Features
 
 - Assign user roles to individual menu items.
-- Define custom user roles through WordPress.
 - Control menu visibility based on user authentication status.
 - Flexible options for displaying menu items to different user groups.
-
-## Latest Release
-
-[![Latest Release](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/kahnu044/menu-by-user-roles/releases/tag/v1.0.0)
 
 ## Installation
 
