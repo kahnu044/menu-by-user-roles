@@ -16,7 +16,7 @@ Version: 1.0.0
  *
  */
 
-function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
+function mbuserroles_wp_menu_item_user_role_section($item_id, $item)
 {
 
     $selected_role = get_post_meta($item_id, '_wp_menu_item_user_role', true);
@@ -25,7 +25,7 @@ function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
     echo '<p class="field-wp-user-roles description description-wide">';
     echo '<label for="edit-menu-item-user-role-' . $item_id . '">';
     echo 'Choose User Role <br/>';
-    echo '<select class="widefat" name="wp_mbur_menu_item_role[' . $item_id . ']" id="wp-mbur-menu-item-role-' . $item_id . '">';
+    echo '<select class="widefat" name="mbuserroles_menu_item_role[' . $item_id . ']" id="mbuserroles-menu-item-role-' . $item_id . '">';
 
     // predefined options
     $options = array(
@@ -45,7 +45,7 @@ function WP_MBUR_wp_menu_item_user_role_section($item_id, $item)
     echo '</label></p>';
 }
 
-add_action('wp_nav_menu_item_custom_fields', 'WP_MBUR_wp_menu_item_user_role_section', 10, 2);
+add_action('wp_nav_menu_item_custom_fields', 'mbuserroles_wp_menu_item_user_role_section', 10, 2);
 
 /**
  * Save user role data for a menu item.
@@ -54,17 +54,17 @@ add_action('wp_nav_menu_item_custom_fields', 'WP_MBUR_wp_menu_item_user_role_sec
  * It retrieves the selected user role from the POST data, sanitizes it, and updates the corresponding post meta.
  *
  */
-function WP_MBUR_save_menu_item_user_role_data($menu_id, $menu_item_db_id)
+function mbuserroles_save_menu_item_user_role_data($menu_id, $menu_item_db_id)
 {
 
-    if (isset($_POST['wp_mbur_menu_item_role'][$menu_item_db_id])) {
-        $selected_role = sanitize_text_field($_POST['wp_mbur_menu_item_role'][$menu_item_db_id]);
+    if (isset($_POST['mbuserroles_menu_item_role'][$menu_item_db_id])) {
+        $selected_role = sanitize_text_field($_POST['mbuserroles_menu_item_role'][$menu_item_db_id]);
         update_post_meta($menu_item_db_id, '_wp_menu_item_user_role', $selected_role);
     } else {
         delete_post_meta($menu_item_db_id, '_wp_menu_item_user_role');
     }
 }
-add_action('wp_update_nav_menu_item', 'WP_MBUR_save_menu_item_user_role_data', 10, 2);
+add_action('wp_update_nav_menu_item', 'mbuserroles_save_menu_item_user_role_data', 10, 2);
 
 
 /**
@@ -76,9 +76,9 @@ add_action('wp_update_nav_menu_item', 'WP_MBUR_save_menu_item_user_role_data', 1
  *
  */
 
-function wp_mbur_filter_menu_items($items)
+function mbuserroles_filter_menu_items($items)
 {
-    $filtered_items = $items;
+    $filtered_items = [];
 
     foreach ($items as $item) {
         $item_id = $item->ID;
@@ -98,4 +98,4 @@ function wp_mbur_filter_menu_items($items)
 
     return $filtered_items;
 }
-add_filter('wp_nav_menu_objects', 'wp_mbur_filter_menu_items');
+add_filter('wp_nav_menu_objects', 'mbuserroles_filter_menu_items');
