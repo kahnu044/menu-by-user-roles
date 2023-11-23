@@ -44,6 +44,10 @@ function menuby_user_roles_wp_menu_item_user_role_section( $item_id ) {
 	}
 
 	echo '</select>';
+
+	// Add nonce field to the form.
+	wp_nonce_field( 'menuby_user_roles_nonce_action', 'menuby_user_roles_nonce' );
+
 	echo '</label></p>';
 }
 
@@ -56,6 +60,11 @@ add_action( 'wp_nav_menu_item_custom_fields', 'menuby_user_roles_wp_menu_item_us
  * @param int $menu_item_db_id Menu item ID.
  */
 function menuby_user_roles_save_menu_item_user_role_data( $menu_id, $menu_item_db_id ) {
+
+	// Verify nonce.
+	if ( ! isset( $_POST['menuby_user_roles_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['menuby_user_roles_nonce'] ) ), 'menuby_user_roles_nonce_action' ) ) {
+		return;
+	}
 
 	if ( isset( $_POST['menuby_user_roles_menu_item_role'][ $menu_item_db_id ] ) ) {
 		$selected_role = sanitize_text_field( wp_unslash( $_POST['menuby_user_roles_menu_item_role'][ $menu_item_db_id ] ) );
