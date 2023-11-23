@@ -34,13 +34,13 @@ function menuby_user_roles_wp_menu_item_user_role_section( $item_id ) {
 	);
 
 	// Merge user roles with predefined options.
-	foreach ($roles as $role_key => $role) {
-		$options[$role_key] = $role['name'];
+	foreach ( $roles as $role_key => $role ) {
+		$options[ $role_key ] = $role['name'];
 	}
 
 	foreach ( $options as $value => $label ) {
 		$selected = ( $selected_role === $value ) ? 'selected' : '';
-		echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
+		echo '<option value="' . esc_attr( $value ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $label ) . '</option>';
 	}
 
 	echo '</select>';
@@ -58,7 +58,7 @@ add_action( 'wp_nav_menu_item_custom_fields', 'menuby_user_roles_wp_menu_item_us
 function menuby_user_roles_save_menu_item_user_role_data( $menu_id, $menu_item_db_id ) {
 
 	if ( isset( $_POST['menuby_user_roles_menu_item_role'][ $menu_item_db_id ] ) ) {
-		$selected_role = sanitize_text_field( $_POST['menuby_user_roles_menu_item_role'][ $menu_item_db_id ] );
+		$selected_role = sanitize_text_field( wp_unslash( $_POST['menuby_user_roles_menu_item_role'][ $menu_item_db_id ] ) );
 		update_post_meta( $menu_item_db_id, '_wp_menu_item_user_role', $selected_role );
 	} else {
 		delete_post_meta( $menu_item_db_id, '_wp_menu_item_user_role' );
@@ -80,13 +80,13 @@ function menuby_user_roles_filter_menu_items( $items ) {
 		$item_id       = $item->ID;
 		$selected_role = get_post_meta( $item_id, '_wp_menu_item_user_role', true );
 
-		if ( $selected_role === 'all' ) {
+		if ( 'all' === $selected_role ) {
 			$filtered_items[] = $item;
-		} elseif ( $selected_role === 'unauthenticated' && ! is_user_logged_in() ) {
+		} elseif ( 'unauthenticated' === $selected_role && ! is_user_logged_in() ) {
 			$filtered_items[] = $item;
 		} elseif ( is_user_logged_in() ) {
 			$user = wp_get_current_user();
-			if ( in_array( $selected_role, $user->roles ) ) {
+			if ( in_array( $selected_role, $user->roles, true ) ) {
 				$filtered_items[] = $item;
 			}
 		}
