@@ -8,9 +8,16 @@
  * Requires PHP:      7.2
  * Author:            kahnu044
  * Author URI:        https://github.com/kahnu044
+ * License:           GPL2+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  *
  * @package MenuByUserRoles
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Render a custom user role selection field for a menu item.
