@@ -1,16 +1,16 @@
 === Menu By User Roles ===
 Contributors: kahnu044
-Tags: menu, user roles, visibility, authentication
+Tags: menu, user roles, access control, navigation, role-based menus,site navigation, menu visibility
 Requires at least: 4.0
 Requires PHP: 7.0
 Tested up to: 6.4.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL2+
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 == Description ==
 
-Custom Menu User Roles is a WordPress plugin that allows you to control the visibility of menu items based on user roles. You can assign specific user roles to each menu item, ensuring that only users with those roles can see and access the corresponding links.
+Menu By User Roles is a WordPress plugin that allows you to control the visibility of menu items based on user roles. You can assign specific user roles to each menu item, ensuring that only users with those roles can see and access the corresponding links.
 
 For more information and usage instructions, visit the [GitHub Repository](https://github.com/kahnu044/menu-by-user-roles).
 
@@ -22,12 +22,14 @@ For more information and usage instructions, visit the [GitHub Repository](https
 
 == Screenshots ==
 
-1. ![Screenshot 1](assets/screenshots/menu-by-user-roles-screenshot.png)
-   *Here is an example of a menu item with user role selection options.*
+1. Here is an example of a menu item with user role selection options.
 
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 1.0.1 =
+* Update: New version of the plugin released
 
 = 1.0.0 =
 * Initial release
