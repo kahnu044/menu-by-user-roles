@@ -47,7 +47,7 @@ function menuby_user_roles_wp_menu_item_user_role_section( $item_id ) {
 
 	echo '<p class="field-wp-user-roles description description-wide">';
 	echo '<label for="edit-menu-item-user-role-' . esc_attr( $item_id ) . '">';
-	echo 'Choose User Role <br/>';
+	echo 'Choose User Roles <br/>';
 	echo '<select style="width: 100%" multiple="multiple" class="widefat menuby-user-roles-dropdown" name="menuby_user_roles_menu_item_roles[' . esc_attr( $item_id ) . '][]" id="wp-mbur-menu-item-roles-' . esc_attr( $item_id ) . '">';
 
 	// Predefined options.

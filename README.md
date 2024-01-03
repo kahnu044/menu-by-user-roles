@@ -10,7 +10,7 @@ Welcome to the official GitHub repository for "Menu By User Roles," the ultimate
 
 ## Installation
 
-1. Download the plugin as a ZIP file.
+1. Download the plugin as a ZIP file from [Here](https://wordpress.org/plugins/menu-by-user-roles/).
 2. Log in to your WordPress admin panel.
 3. Navigate to `Plugins` > `Add New`.
 4. Click the `Upload Plugin` button and select the ZIP file you downloaded.
