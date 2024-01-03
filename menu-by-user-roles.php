@@ -21,16 +21,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'MBUR_PLUGIN_VERSION', '1.0.1' );
 
-
-function enqueue_select2_for_menu() {
+/**
+ * Enqueue Select2 scripts and styles for the menu.
+ */
+function menuby_user_roles_enqueue_select2() {
 	$screen = get_current_screen();
-	if ( $screen->id === 'nav-menus' ) { // Check if it's the menu page
+	if ( 'nav-menus' === $screen->id ) {
 		wp_enqueue_style( 'menuby-user-roles-select2-style', plugins_url( 'assets/css/select2.min.css', __FILE__ ), array(), MBUR_PLUGIN_VERSION );
 		wp_enqueue_script( 'menuby-user-roles-select2-script', plugins_url( 'assets/js/select2.min.js', __FILE__ ), array( 'jquery' ), MBUR_PLUGIN_VERSION, true );
 		wp_enqueue_script( 'menuby-user-roles-main-script', plugins_url( 'assets/js/main.js', __FILE__ ), array( 'jquery' ), MBUR_PLUGIN_VERSION, true );
 	}
 }
-add_action( 'admin_enqueue_scripts', 'enqueue_select2_for_menu' );
+add_action( 'admin_enqueue_scripts', 'menuby_user_roles_enqueue_select2' );
 
 
 /**
@@ -48,13 +50,13 @@ function menuby_user_roles_wp_menu_item_user_role_section( $item_id ) {
 	echo 'Choose User Role <br/>';
 	echo '<select style="width: 100%" multiple="multiple" class="widefat menuby-user-roles-dropdown" name="menuby_user_roles_menu_item_roles[' . esc_attr( $item_id ) . '][]" id="wp-mbur-menu-item-roles-' . esc_attr( $item_id ) . '">';
 
-	// Predefined options
-	echo '<option value="all" ' . ( is_array( $selected_roles ) && in_array( 'all', $selected_roles ) ? 'selected' : '' ) . '>All</option>';
-	echo '<option value="unauthenticated" ' . ( is_array( $selected_roles ) && in_array( 'unauthenticated', $selected_roles ) ? 'selected' : '' ) . '>Unauthenticated</option>';
+	// Predefined options.
+	echo '<option value="all" ' . ( empty( $selected_roles ) || ( is_array( $selected_roles ) && in_array( 'all', $selected_roles, true ) ) ? 'selected' : '' ) . '>All</option>';
+	echo '<option value="unauthenticated" ' . ( is_array( $selected_roles ) && in_array( 'unauthenticated', $selected_roles, true ) ? 'selected' : '' ) . '>Unauthenticated</option>';
 
-	// User roles
+	// User roles.
 	foreach ( $roles as $role_key => $role ) {
-		$selected = ( is_array( $selected_roles ) && in_array( $role_key, $selected_roles ) ) ? 'selected' : '';
+		$selected = ( is_array( $selected_roles ) && in_array( $role_key, $selected_roles, true ) ) ? 'selected' : '';
 		echo '<option value="' . esc_attr( $role_key ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $role['name'] ) . '</option>';
 	}
 
