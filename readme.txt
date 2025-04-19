@@ -3,8 +3,8 @@ Contributors: kahnu044
 Tags: Tags: menu-visibility, user-roles, role-based-menus, access-control, site-navigation
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 6.7.1
-Stable tag: 2.0.1
+Tested up to: 6.8
+Stable tag: 2.0.2
 License: GPL2+
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -29,6 +29,10 @@ For more information and usage instructions, visit the [GitHub Repository](https
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 2.0.2 =
+* Update: Tested with latest WordPress 6.8
+* Bug FIx: Select2 user roles dropdown issue fixed
 
 = 2.0.1 =
 * Update: Block-Based Navigation Issue Fixed
