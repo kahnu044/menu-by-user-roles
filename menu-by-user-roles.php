@@ -3,8 +3,8 @@
 /**
  * Plugin Name:       Menu By User Roles
  * Plugin URI:        https://github.com/kahnu044/menu-by-user-roles
- * Description:       It empowers website administrators to create custom menus tailored to specific user roles.
- * Version:           2.0.3
+ * Description:       It allows you to control the visibility of menu items based on user roles.
+ * Version:           2.0.4
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * Author:            kahnu044
@@ -37,19 +37,6 @@ function menu_by_user_roles_enqueue_assets()
 add_action('admin_enqueue_scripts', 'menu_by_user_roles_enqueue_assets');
 
 /**
- * Add nonce field to the menu admin page.
- */
-function menu_by_user_roles_add_nonce_field()
-{
-	$screen = get_current_screen();
-	if ('nav-menus' === $screen->id) {
-		// Add nonce field to the form - only once per page
-		wp_nonce_field('menu_by_user_roles_nonce_action', 'menu_by_user_roles_nonce');
-	}
-}
-add_action('admin_footer', 'menu_by_user_roles_add_nonce_field');
-
-/**
  * Render a custom user role selection field for single menu item.
  *
  * @param int $item_id Menu item ID.
@@ -76,6 +63,9 @@ function menu_by_user_roles_wp_menu_item_user_role_section($item_id)
 	}
 
 	echo '</select>';
+
+	// Nonce Updated
+	wp_nonce_field('menu_by_user_roles_nonce_action', 'menu_by_user_roles_nonce');
 
 	echo '</label></p>';
 }
