@@ -4,9 +4,12 @@ Welcome to the official GitHub repository for "Menu By User Roles," the ultimate
 
 ## Features
 
-- Assign user roles to individual menu items.
-- Control menu visibility based on user authentication status.
-- Flexible options for displaying menu items to different user groups.
+- **Multiple user role selection** - Support for assigning multiple roles to a single menu item.
+- **Block Editor (Gutenberg) support** - Full compatibility with WordPress block navigation.
+- **Unauthenticated user targeting** - Specifically show/hide menus for logged-out visitors.
+- **Dynamic role detection** - Automatically detects all available user roles in your WordPress site.
+- **Secure implementation** - Built with WordPress security best practices and nonce verification.
+- **Conflict-free operation** - Namespaced to avoid conflicts with other plugins using Select2.
 
 ## Installation
 
@@ -43,4 +46,4 @@ This project is licensed under the [GNU General Public License v2 or later](http
 
 ## Author
 
-[Kahnu Charan Swain](https://github.com/kahnu044)
+[Kahnu044](https://github.com/kahnu044)
