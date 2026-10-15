@@ -4,7 +4,7 @@
  * Plugin Name:       Menu By User Roles
  * Plugin URI:        https://github.com/kahnu044/menu-by-user-roles
  * Description:       It allows you to control the visibility of menu items based on user roles.
- * Version:           2.0.4
+ * Version:           2.0.5
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * Author:            kahnu044
@@ -20,7 +20,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('MBUR_PLUGIN_VERSION', '2.0.3');
+define('MBUR_PLUGIN_VERSION', '2.0.5');
 
 /**
  * Enqueue scripts and styles for the menu.
@@ -28,7 +28,7 @@ define('MBUR_PLUGIN_VERSION', '2.0.3');
 function menu_by_user_roles_enqueue_assets()
 {
 	$screen = get_current_screen();
-	if ('nav-menus' === $screen->id || 'site-editor' === $screen->id) {
+	if ($screen && ('nav-menus' === $screen->id || 'site-editor' === $screen->id)) {
 		wp_enqueue_style('menu_by-user-roles-select2-style', plugins_url('assets/css/select2.min.css', __FILE__), array(), MBUR_PLUGIN_VERSION);
 		wp_enqueue_script('menu_by-user-roles-select2-script', plugins_url('assets/js/select2.min.js', __FILE__), array('jquery'), MBUR_PLUGIN_VERSION, true);
 		wp_enqueue_script('menu_by-user-roles-main-script', plugins_url('assets/js/main.js', __FILE__), array('jquery'), MBUR_PLUGIN_VERSION, true);
@@ -65,7 +65,7 @@ function menu_by_user_roles_wp_menu_item_user_role_section($item_id)
 	echo '</select>';
 
 	// Nonce Updated
-	wp_nonce_field('menu_by_user_roles_nonce_action', 'menu_by_user_roles_nonce');
+	wp_nonce_field('menu_by_user_roles_nonce_action', 'menu_by_user_roles_nonce', false);
 
 	echo '</label></p>';
 }
@@ -84,8 +84,8 @@ function menu_by_user_roles_save_menu_item_user_role_data($menu_id, $menu_item_d
 		return;
 	}
 
-	$selected_roles = isset($_POST['menu_by_user_roles_menu_item_roles'][$menu_item_db_id])
-		? array_filter(array_unique(array_map('sanitize_text_field', wp_unslash($_POST['menu_by_user_roles_menu_item_roles'][$menu_item_db_id]))))
+	$selected_roles = (isset($_POST['menu_by_user_roles_menu_item_roles'][$menu_item_db_id]) && is_array($_POST['menu_by_user_roles_menu_item_roles'][$menu_item_db_id]))
+		? array_values(array_filter(array_unique(array_map('sanitize_text_field', wp_unslash($_POST['menu_by_user_roles_menu_item_roles'][$menu_item_db_id])))))
 		: '';
 
 	update_post_meta($menu_item_db_id, '_wp_menu_item_user_roles', $selected_roles);
@@ -109,10 +109,11 @@ function menu_by_user_roles_filter_menu_items($items)
 		$selected_roles = get_post_meta($item_id, '_wp_menu_item_user_roles', true);
 
 		if (
+			empty($selected_roles) ||
 			! is_array($selected_roles) ||
 			(in_array('all', $selected_roles, true)) ||
 			(in_array('unauthenticated', $selected_roles, true) && ! is_user_logged_in()) ||
-			(is_user_logged_in() && array_intersect($selected_roles, $user->roles))
+			(is_user_logged_in() && ! empty(array_intersect($selected_roles, (array) $user->roles)))
 		) {
 			$allowed_items[] = $item;
 		}
@@ -177,22 +178,26 @@ function menu_by_user_roles_filter_navigation_link_render($block_content, $block
 	if ($block['blockName'] === 'core/navigation-link' && isset($block['attrs']['userRoleVisibility'])) {
 		$selected_roles = $block['attrs']['userRoleVisibility'];
 
+		if (! is_array($selected_roles)) {
+			return $block_content;
+		}
+
 		// If no roles are selected or "All" is selected, show the menu item to everyone
-		if (empty($selected_roles) || in_array('all', $selected_roles)) {
+		if (empty($selected_roles) || in_array('all', $selected_roles, true)) {
 			return $block_content;
 		}
 
 		$is_logged_in = is_user_logged_in();
 		$current_user = wp_get_current_user();
-		$user_roles = (array) $current_user->roles;
+		$user_roles   = (array) $current_user->roles;
 
 		// If the user is not logged in, assign "unauthenticated" role
 		if (empty($user_roles)) {
-			$user_roles = ['unauthenticated'];
+			$user_roles = array('unauthenticated');
 		}
 
-		// // Hide if logged in and selected unauthenticated role
-		if (in_array('unauthenticated', $selected_roles) && $is_logged_in) {
+		// Hide if logged in and selected unauthenticated role
+		if (in_array('unauthenticated', $selected_roles, true) && $is_logged_in) {
 			return '';
 		}
 
